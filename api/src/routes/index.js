@@ -7,11 +7,12 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 const meliSearch = require("./modules/meliSearch");
-
+const tdMiaSearch = require("./modules/tdMiaSearch");
 
 
 
 router.use("/melisearch", meliSearch);
+router.use("/tdmiasearch", tdMiaSearch);
 
 
 module.exports = router;
