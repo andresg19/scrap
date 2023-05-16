@@ -4,13 +4,14 @@ const router = Router();
 
 
 router.get("/", async(req, res, next) => {
-
+    let {product} = req.query;
+    console.log(product)
     try {
         const navigator = await puppeteer.launch();
         const page = await navigator.newPage();
 
         await page.goto(
-            `${process.env.TDMIAURL}`+'search?amzs=musculosas'
+            process.env.TDMIAURL+`search?amzs=${product}`
         );
 
         let table = await page.evaluate(() => {

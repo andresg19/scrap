@@ -4,13 +4,14 @@ const router = Router();
 
 
 router.get("/", async(req, res, next) => {
+    let { product } = req.query;
+    console.log(product)
     try {
-
         const navigator = await puppeteer.launch();
         const page = await navigator.newPage();
         
         await page.goto(
-            `${process.env.EBAYURL}`+'_from=R40&_trksid=p2380057.m570.l1313&_nkw=adidas&_sacat=0'
+            process.env.EBAYURL+`_from=R40&_trksid=p2380057.m570.l1313&_nkw=${product}&_sacat=0`
         );
         
         let table = await page.evaluate(() => {

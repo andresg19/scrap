@@ -5,13 +5,14 @@ const puppeteer = require("puppeteer");
 
 
 router.get("/", async (req, res, next) => {
+    let  {product}  = req.query;
+    console.log(product)
     try {
-
         const navigator = await puppeteer.launch();
         const page = await navigator.newPage();
 
         await page.goto(
-            `${process.env.MELIURL}` + "pizarra-de-jueguete#D[A:pizarra%20de%20jueguete]"
+            process.env.MELIURL+`${product}#D[A:${product}]`
         );
         let table = await page.evaluate(() => {
             const productName = [
