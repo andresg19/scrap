@@ -1,13 +1,16 @@
 const puppeteer = require("puppeteer");
-require("dotenv").config();
+const { Router } = require("express");
+const router = Router();
 
-const tdMiaScrap = async () => {
+
+router.get("/", async(req, res, next) => {
+
     try {
         const navigator = await puppeteer.launch();
         const page = await navigator.newPage();
 
         await page.goto(
-            `${process.env.TDMIAURL}`+'search?amzs=remeras'
+            `${process.env.TDMIAURL}`+'search?amzs=musculosas'
         );
 
         let table = await page.evaluate(() => {
@@ -15,7 +18,7 @@ const tdMiaScrap = async () => {
             [...document.getElementsByClassName('item-name')
         ].map((nodo) => {
             return nodo.innerText
-        })
+        });
 
             const productPrice = [
                 ...document.getElementsByClassName("item-real-price"),
@@ -42,11 +45,13 @@ const tdMiaScrap = async () => {
                 img: imgProduct[i],
             }));
         });
-        console.log(table);
+
+        res.status(200).send(table)
         await navigator.close();
     } catch (error) {
-        console.log(error)
+        next(error)
     }
-}
+})
 
-module.exports= tdMiaScrap;
+
+module.exports= router;

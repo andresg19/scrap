@@ -1,15 +1,18 @@
+const { Router } = require("express");
+const router = Router();
 const puppeteer = require("puppeteer");
-require("dotenv").config();
 
-const meliScrap = async () => {
+
+
+router.get("/", async (req, res, next) => {
     try {
+
         const navigator = await puppeteer.launch();
         const page = await navigator.newPage();
 
         await page.goto(
-            `${process.env.MELIURL}`+"pizarra-de-jueguete#D[A:pizarra%20de%20jueguete]"
+            `${process.env.MELIURL}` + "pizarra-de-jueguete#D[A:pizarra%20de%20jueguete]"
         );
-
         let table = await page.evaluate(() => {
             const productName = [
                 ...document.getElementsByClassName(
@@ -45,13 +48,13 @@ const meliScrap = async () => {
                 link: linkToProduct[i],
                 img: imgProduct[i],
             }));
-        });
-
-        console.log(table);
-        await navigator.close();
+        })
+       
+        res.status(200).send(table)
+        navigator.close();
     } catch (error) {
-        console.log(error);
+        next(error)
     }
-};
+})
 
-module.exports = meliScrap;
+module.exports = router;

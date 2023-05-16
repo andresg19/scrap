@@ -6,13 +6,15 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-const meliSearch = require("./modules/meliSearch");
-const tdMiaSearch = require("./modules/tdMiaSearch");
+const meliSearch = require("./meliSearch");
+const tdMiaSearch = require("./tdMiaSearch");
+const ebayScrap = require("./ebaySearch");
 
 
 
 router.use("/melisearch", meliSearch);
 router.use("/tdmiasearch", tdMiaSearch);
+router.use("/ebaysearch", ebayScrap);
 
 
 module.exports = router;
