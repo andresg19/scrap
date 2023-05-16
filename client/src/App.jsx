@@ -1,20 +1,11 @@
-import { useState } from 'react'
-import './App.css'
+import Home from './components/Home';
+import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 
 function App() {
-const [product, setProduct] = useState('');
-console.log(product)
-
-
-  return (
-    <>
-    <h1>Scraping</h1>
-    <form action="submit">
-    <input type="text" onChange={(e)=> {setProduct(e.target.value)}} placeholder='Ingrese el producto que busca...' />
-    <button type='submit'>Buscar</button>
-    </form>
-    </>
-  )
+  const element = useRoutes([
+    { path: "/", element: <Home /> },
+  ]);
+  return element;
 }
 
 export default App

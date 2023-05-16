@@ -1,0 +1,3 @@
+export const MELI_RESULTS = "MELI_RESULTS";
+export const TDMIA_RESULTS = "TDMIA_RESULTS";
+export const EBAY_RESULTS = "EBAY_RESULTS";
