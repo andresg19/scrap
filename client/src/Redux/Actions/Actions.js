@@ -1,5 +1,5 @@
 import axios from "axios";
-import {TDMIA_RESULTS, EBAY_RESULTS} from "./ActionTypes";
+import {TDMIA_RESULTS, EBAY_RESULTS, CLEAR_STATE} from "./ActionTypes";
 
 
 
@@ -33,3 +33,14 @@ export const ebayResults = (product) => {
   }
 }
 
+export const clearState = () => {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: CLEAR_STATE,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

@@ -1,3 +1,3 @@
 export const TDMIA_RESULTS = "TDMIA_RESULTS";
 export const EBAY_RESULTS = "EBAY_RESULTS";
-export const STATUS_LOAD = "STATUS_LOAD"
+export const CLEAR_STATE = "CLEAR_STATE";

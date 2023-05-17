@@ -1,4 +1,4 @@
-import { EBAY_RESULTS, TDMIA_RESULTS } from "../Actions/ActionTypes";
+import { CLEAR_STATE, EBAY_RESULTS, TDMIA_RESULTS } from "../Actions/ActionTypes";
 
 const initialState = {
 // meliResults: [],
@@ -24,6 +24,12 @@ export default function rootReducer(state = initialState, {type, payload}) {
             return {
                 ...state,
                 ebayResults: payload,
+            }
+        case CLEAR_STATE:
+            return {
+                ...state,
+                ebayResults: [],
+                tdmiaResults: [],
             }
 
         default:
