@@ -15,6 +15,12 @@ router.get("/", async (req, res, next) => {
             process.env.MELIURL+`${product}#D[A:${product}]`
         );
         let table = await page.evaluate(() => {
+            const imgProduct = [
+                ...document.getElementsByClassName('ui-search-result-image__element shops__image-element')
+            ].map((nodo) => {
+                return nodo.src
+            })
+
             const productName = [
                 ...document.getElementsByClassName(
                     "ui-search-item__title shops__item-title"
@@ -24,7 +30,7 @@ router.get("/", async (req, res, next) => {
             });
 
             const productPrice = [
-                ...document.getElementsByClassName("price-tag-text-sr-only"),
+                ...document.getElementsByClassName("price-tag-amount"),
             ].map((nodo) => {
                 return nodo.innerText;
             });
@@ -37,17 +43,12 @@ router.get("/", async (req, res, next) => {
                 return nodo.href;
             });
 
-            const imgProduct = [
-                ...document.getElementsByClassName('ui-search-result-image__element shops__image-element')
-            ].map((nodo) => {
-                return nodo.src
-            })
 
             return productName.map((product, i) => ({
+                img: imgProduct[i],
                 product: product,
                 price: productPrice[i],
                 link: linkToProduct[i],
-                img: imgProduct[i],
             }));
         })
        

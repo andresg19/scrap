@@ -15,6 +15,11 @@ router.get("/", async(req, res, next) => {
         );
 
         let table = await page.evaluate(() => {
+            const imgProduct = [
+                ...document.getElementsByClassName('main-image')
+            ].map((nodo) => {
+                return nodo.src
+            })
             const productName = 
             [...document.getElementsByClassName('item-name')
         ].map((nodo) => {
@@ -33,21 +38,16 @@ router.get("/", async(req, res, next) => {
                 return nodo.childNodes[1].href
             })
 
-            const imgProduct = [
-                ...document.getElementsByClassName('main-image')
-            ].map((nodo) => {
-                return nodo.src
-            })
 
             return productName.map((product, i) => ({
+                img: imgProduct[i],
                 product: product,
                 price: productPrice[i],
                 link: linkToProduct[i],
-                img: imgProduct[i],
             }));
         });
 
-        res.status(200).send(table)
+        res.status(200).send(table.slice(0,15))
         await navigator.close();
     } catch (error) {
         next(error)
