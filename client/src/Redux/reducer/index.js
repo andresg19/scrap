@@ -1,18 +1,20 @@
-import { EBAY_RESULTS, MELI_RESULTS, TDMIA_RESULTS } from "../Actions/ActionTypes";
+import { EBAY_RESULTS, TDMIA_RESULTS } from "../Actions/ActionTypes";
 
 const initialState = {
-meliResults: [],
+// meliResults: [],
 tdmiaResults: [],
 ebayResults: [],
+status: false,
 };
 
 export default function rootReducer(state = initialState, {type, payload}) {
     switch (type) {
-        case MELI_RESULTS:
-            return {
-                ...state,
-                meliResults: payload,
-            }
+        // case MELI_RESULTS:
+    
+        //     return {
+        //         ...state,
+        //         meliResults: payload,
+        //     }
         case TDMIA_RESULTS:
             return {
                 ...state,
@@ -23,6 +25,7 @@ export default function rootReducer(state = initialState, {type, payload}) {
                 ...state,
                 ebayResults: payload,
             }
+
         default:
             return state;
     };
